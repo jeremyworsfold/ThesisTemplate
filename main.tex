@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper,twoside]{memoir}
+\documentclass[11pt,a4paper,oneside]{memoir}
 
 \usepackage{ifthen}
 \usepackage{lipsum}
@@ -33,14 +33,7 @@ bookmarks=true,bookmarksopenlevel=2]{hyperref}
 \usepackage[nohyperlinks]{acronym}
 
 % FLIPBOOK
-
-\makeatletter
-\if@twoside
-    \usepackage{styles/flipbook2}
-\else 
-    \usepackage{flipbook}
-\fi
-\makeatother
+\usepackage{styles/myflipbook}
 
 % TIKZ AND PGFPLOTS
 
@@ -91,17 +84,11 @@ bookmarks=true,bookmarksopenlevel=2]{hyperref}
 
 \begin{document}
 
-
-% if two side then switch to arabic numbering so the flipbook knows what the pagenumber is
-\makeatletter
-\if@twoside
-    \pagenumbering{arabic}
-\else
-    \frontmatter
-\fi
-\makeatother
+\frontmatter
 
 \input{frontmatter/all.tex}
+
+\mainmatter
 
 % RESET SETTINGS AFTER FRONT MATTER
 
@@ -111,7 +98,6 @@ bookmarks=true,bookmarksopenlevel=2]{hyperref}
 \if@twoside
     \input{styles/headers-twoside.tex}
 \else
-    \mainmatter
     \input{styles/headers-oneside.tex}
 \fi
 \makeatother

@@ -11,21 +11,23 @@
 
 % FOOTER
 
-\fancyfoot{} 
-
-\renewcommand{\inputflipbookframe}[3]{\includegraphics[scale=0.04]{#1#2.#3}}
-
+\fancyfoot{}
 \fancyfoot[C]{\thepage}
-\fancyfoot[RO]{%
-    \flipbookframe{visuals/flipbook/image_}[png]
-    \hspace{-100pt}
+\fancyfoot[RO]{
+    \hspace{70pt}
+    \setlength\unitlength{1cm}
+    \begin{picture}(0,0)
+    \put(2.0,-1.0){
+    \fbImageB{./visuals/flipbook/image_}{png}{scale=0.04}
+    }
+    \end{picture}
 }
-\fancyfoot[LE]{%
-    \hspace{-100pt}
-    \flipbookframe{visuals/flipbook/image_}[png]
-}
-
-\fancypagestyle{plain}{% Clear header for chapter pages and such
-	\fancyhead{}
-	\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[LE]{
+    \hspace{-70pt}
+    \setlength\unitlength{1cm}
+    \begin{picture}(0,0)
+    \put(-1.2,-1.0){
+    \fbImageF{./visuals/flipbook/image_}{png}{scale=0.04}
+    }
+    \end{picture}
 }
