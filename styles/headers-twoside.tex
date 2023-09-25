@@ -1,0 +1,31 @@
+\pagestyle{fancy}
+
+% HEADER
+
+\fancyhead{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter.\space#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\space#1}}
+\fancyhead[RO]{\spacedlowsmallcaps{\rightmark}}
+\fancyhead[LE]{\spacedlowsmallcaps{\leftmark}}
+
+% FOOTER
+
+\fancyfoot{} 
+
+\renewcommand{\inputflipbookframe}[3]{\includegraphics[scale=0.04]{#1#2.#3}}
+
+\fancyfoot[C]{\thepage}
+\fancyfoot[RO]{%
+    \flipbookframe{visuals/flipbook/image_}[png]
+    \hspace{-100pt}
+}
+\fancyfoot[LE]{%
+    \hspace{-100pt}
+    \flipbookframe{visuals/flipbook/image_}[png]
+}
+
+\fancypagestyle{plain}{% Clear header for chapter pages and such
+	\fancyhead{}
+	\renewcommand{\headrulewidth}{0pt}
+}

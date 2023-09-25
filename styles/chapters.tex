@@ -1,0 +1,43 @@
+\DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\oldstylenums{\textsc{\MakeTextUppercase{#1}}}}}%
+\DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\oldstylenums{\textsc{\MakeTextLowercase{#1}}}}}%
+
+%%% CHAPTER'S STYLE
+%\newlength\mychapindent
+%\setlength\mychapindent{\marginparwidth+\marginparsep+3.4em}
+%\definecolor{chaptercolor}{rgb}{0.5,0.5,0.5}
+\definecolor{chaptercolor}{rgb}{0.318,0.337,0.38}
+\makeatletter
+\newlength\dlf@normtxtw
+\setlength\dlf@normtxtw{\textwidth}
+\newsavebox{\feline@chapter}
+\newcommand\feline@chapter@marker[1][4cm]{%
+  \sbox\feline@chapter{%
+    \resizebox{!}{#1}{\fboxsep=1pt%
+      \colorbox{chaptercolor}{\color{white}\bfseries\thechapter}%
+    }}%
+  \rotatebox{90}{%position titre "Chapitre"
+    \resizebox{%
+      \heightof{\usebox{\feline@chapter}}+\depthof{\usebox{\feline@chapter}}}%
+    {!}{\scshape\so\@chapapp}}\quad%
+  \raisebox{\depthof{\usebox{\feline@chapter}}}{\usebox{\feline@chapter}}%
+}
+\newcommand\feline@chm[1][4cm]{%
+  \sbox\feline@chapter{\feline@chapter@marker[#1]}%
+  \makebox[0pt][l]{% aka \rlap
+    \makebox[18cm][r]{\usebox\feline@chapter}%
+  }}        
+\makechapterstyle{daleif1}{
+  \renewcommand\chapnamefont{\normalfont\Large\scshape\raggedleft\so}
+  \renewcommand\chaptitlefont{\normalfont\huge\bfseries\scshape}
+  \renewcommand\chapternamenum{}
+  \renewcommand\printchaptername{\color{black}}
+  % \renewcommand\printchapternum{\hspace{-\marginparwidth-\marginparsep-3.4em}\feline@chm[2.5cm]\par}
+  \renewcommand\printchapternum{\hspace{-\mychapindent}\feline@chm[2.5cm]\par}
+  %\renewcommand\printchapternum{\feline@chm[2.5cm]} % taille de la box
+  \setlength\beforechapskip{-1cm}
+  \renewcommand\afterchapternum{\par\vskip\midchapskip}
+  \renewcommand\printchaptertitle[1]{\chaptitlefont\raggedleft{\color{chaptercolor}{##1}}\par}
+}
+
+\makeatother
+\chapterstyle{daleif1}

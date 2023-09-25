@@ -1,0 +1,9 @@
+.aux
+
+**/pdf/
+
+tikz/*.dpth
+tikz/*.log
+tikz/*.bib
+
+latexdiff

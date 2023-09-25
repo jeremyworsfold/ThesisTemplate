@@ -1,0 +1,54 @@
+% MARGINS
+
+\setlrmarginsandblock{0.18\paperwidth}{*}{1}
+\setulmarginsandblock{0.20\paperwidth}{*}{1}
+\setheadfoot{\onelineskip}{4\onelineskip}
+\setheaderspaces{*}{2\onelineskip}{*}
+\checkandfixthelayout
+
+% CHAPTER STYLE
+
+\input{styles/chapters.tex}
+
+% HEADERS AND FOOTERS
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\input{styles/headers-oneside.tex}
+\fancypagestyle{plain}{
+  \fancyhead{}
+  \fancyfoot{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+\setlength{\headwidth}{\textwidth}
+
+% SECTION HEADINGS
+
+\setsecheadstyle{\spacedlowsmallcaps}
+\setsubsecheadstyle{\itshape\raggedright}
+\setsubsubsecheadstyle{\bfseries\raggedright}
+
+\linespread{1.1}
+
+% FOOTNOTES
+
+% text styling of all side footnotes
+\renewcommand{\footnotesize}{\fontsize{9pt}{10pt}\selectfont}
+\renewcommand{\foottextfont}{\footnotesize}
+% styling and placement of mark
+\footmarkstyle{{#1. }}
+\setlength{\footmarkwidth}{0em}
+\setlength{\footmarksep}{-\footmarkwidth}
+
+% full width environment for title page
+
+\strictpagechecktrue
+\newenvironment{fullwidth}{ }{ }
+
+% fix chapter number indentation
+
+\newlength{\mychapindent}
+\setlength{\mychapindent}{\marginparwidth}
+\addtolength{\mychapindent}{\marginparsep}
+\addtolength{\mychapindent}{2.8em}

@@ -1,0 +1,134 @@
+\documentclass[11pt,a4paper,twoside]{memoir}
+
+\usepackage{ifthen}
+\usepackage{lipsum}
+
+% MATHS PACKAGES
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{nicefrac}
+\usepackage{mathtools}
+
+% GRAPHICS AND FONT
+
+\usepackage[dvips]{graphicx}
+\usepackage{calc,graphicx,soul}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage[final,tracking=true,kerning=true]{microtype}
+\usepackage{newpxtext,newpxmath}
+
+% REFERENCES 
+
+\usepackage[sort&compress]{natbib}
+\usepackage[
+breaklinks=true,colorlinks=true,
+%linkcolor=blue,urlcolor=blue,citecolor=blue,% PDF VIEW
+linkcolor=black,urlcolor=black,citecolor=black,% PRINT
+bookmarks=true,bookmarksopenlevel=2]{hyperref}
+\usepackage{cleveref}
+\usepackage[nohyperlinks]{acronym}
+
+% FLIPBOOK
+
+\makeatletter
+\if@twoside
+    \usepackage{styles/flipbook2}
+\else 
+    \usepackage{flipbook}
+\fi
+\makeatother
+
+% TIKZ AND PGFPLOTS
+
+\usepackage{pgfplots}
+\usepackage{tikz}
+\pgfplotsset{
+    width=13cm,compat=1.18,
+}
+\usepgfplotslibrary{external}
+\tikzexternalize[prefix=tikz/]
+\usetikzlibrary{pgfplots.colorbrewer}
+\input{styles/pgfstyle.tex}
+
+% TITLE PAGE DECLARATIONS
+
+\input{styles/title-style.tex}
+\title{Stochastic Active Flows}
+\author{Jeremy Worsfold}
+\degreemonthyear{September 2023}
+
+% INCLUSIONS
+
+\includeonly{
+    chapters/intro,
+    chapters/chap2,
+    chapters/chap3,
+    chapters/chap4,
+    chapters/conc,
+    chapters/appendix
+}
+
+% SET STYLE
+
+\makeatletter
+\if@twoside
+    \input{styles/style-twoside.tex}
+\else
+    \input{styles/style-oneside.tex}
+\fi
+\makeatother
+
+% SYMBOLS AND MACROS
+
+\input{styles/symbols.tex}
+\newcommand{\mynote}[1]{{\color{purple}[[#1]]}} % useful to make personal notes for yourself later
+
+% DOCUMENT
+
+\begin{document}
+
+
+% if two side then switch to arabic numbering so the flipbook knows what the pagenumber is
+\makeatletter
+\if@twoside
+    \pagenumbering{arabic}
+\else
+    \frontmatter
+\fi
+\makeatother
+
+\input{frontmatter/all.tex}
+
+% RESET SETTINGS AFTER FRONT MATTER
+
+\setlength{\parskip}{0pt}
+\pagestyle{fancy}
+\makeatletter
+\if@twoside
+    \input{styles/headers-twoside.tex}
+\else
+    \mainmatter
+    \input{styles/headers-oneside.tex}
+\fi
+\makeatother
+
+\include{chapters/intro.tex}
+\include{chapters/chap2.tex}
+\include{chapters/chap3.tex}
+\include{chapters/chap4.tex}
+\include{chapters/conc.tex}
+
+\appendix
+
+\include{chapters/appendix.tex}
+
+\pagestyle{plain}
+
+\bibliographystyle{references/bathx}
+\bibliography{references/ref}
+
+\end{document}

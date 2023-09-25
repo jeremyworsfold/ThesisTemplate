@@ -1,0 +1,129 @@
+
+\RequirePackage{setspace}
+
+\makeatletter
+
+\def\degreemonthyear#1{\gdef\@degreemonthyear{#1}}
+
+
+\def\@standardcopyright{
+  Attention is drawn to the fact that copyright of this thesis rests with the author and copyright of any previously published materials included may rest with third parties. 
+  A copy of this thesis has been supplied on condition that anyone who consults it understands that they must not copy it or use material from it except as licenced, permitted by law or with the consent of the author or other copyright owners, as applicable.
+}
+
+\def\@restriction{
+  \noindent The material presented here for examination for the award of a higher degree by research has / has not been incorporated into a submission for another degree.
+}
+
+\def\@declarationofauthorship{
+  \noindent
+  I am the author of this thesis, and the work described therein was carried out by myself personally.
+}
+
+
+\gdef\@iscopyrightpage{0}
+\gdef\@copyrightpage{\vfill}
+\gdef\@copyrightpageafter{\vspace*{\stretch{1}}}
+\def\copyrightpage{%
+  \gdef\@iscopyrightpage{1}%
+  \gdef\@copyrightpage{%
+    \par\vspace*{\stretch{2}}%% * see below
+    \cleardoublepage[empty]%
+    \thispagestyle{empty}%
+    \vspace*{\stretch{1}}%
+  }%
+  \gdef\@copyrightpageafter{%
+    \vspace*{\stretch{2}}%
+  }%
+}
+
+
+\def\signature#1#2{%
+  \par\noindent#1\dotfill\null\par
+  \begin{flushright}
+    \vspace{-0.5em}
+    {\scshape{#2}}
+  \end{flushright}
+}
+
+
+
+\def\maketitle{
+
+\if@twoside
+  % The title page and the copyright page (if applicable) should be odd
+  % pages outside the page numbering system. This does the trick.
+  \if\@iscopyrightpage 0
+    \setcounter{page}{-1}
+  \else
+    \setcounter{page}{-3}
+  \fi
+\else
+  \if\@iscopyrightpage 0
+    \setcounter{page}{0}
+  \else
+    \setcounter{page}{-1}
+  \fi
+\fi
+
+
+% TITLE PAGE
+
+\vspace*{0.1\textheight}
+\begin{fullwidth}
+\begin{center}
+\makeatletter
+
+\includegraphics[width=0.6\textwidth]{visuals/figures/university-of-bath-logo.png}\par
+\vspace{2\baselineskip}
+\rule{\textwidth}{1pt}\par
+
+\vspace{0.8\baselineskip}
+{\huge\bfseries \textsc{\color{chaptercolor}\@title}}
+\\[0.2\baselineskip]
+
+
+\rule{\textwidth}{1pt}\par
+
+\vfill
+{\large\textit{Submitted by}}\\[1.2\baselineskip]
+{\LARGE\textsc{\@author}}\\[1.2\baselineskip]
+{\large\textit{for the degree of Doctor of Philosophy}}\\[1.2\baselineskip]
+{\LARGE\textsc{University of Bath}}\\[1.2\baselineskip]
+{\large\textit{Department of Mathematical Sciences}}
+\vfill
+{\large \textit{\@degreemonthyear}}
+\makeatother
+\end{center}
+\end{fullwidth}
+\newpage
+
+% COPYRIGHT PAGE
+
+\@copyrightpage
+
+\subsection*{Copyright notice}
+{\@standardcopyright}
+
+\vfill
+
+\subsection*{Declaration of any previous submission of work}
+{\@restriction}\\[1.2\baselineskip]
+\signature{Author's signature}{Jeremy Worsfold}
+
+\vfill
+
+\subsection*{Declaration of authorship}
+{\@declarationofauthorship}\\[1.2\baselineskip]
+\signature{Author's signature}{Jeremy Worsfold}
+
+\vfill
+
+\@copyrightpageafter
+
+% The \kern0pt pushes any depth into the height.  Thanks to Richard Stone.
+
+\par\kern 0pt\null
+\clearpage
+}
+\makeatother
